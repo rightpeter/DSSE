@@ -1,0 +1,6 @@
+As observed in another issue with respect to SSE security is whether the scheme
+is secure against adaptive chosen-keyword attacks CKA2 or only against
+non-adaptive chosen keyword attacks CKA1 The former guarantees security even
+when the clients queries are based on the encrypted index and the results of
+previous queries The latter only only guarantees security if the clients
+queries are independent of the index and of previous results
