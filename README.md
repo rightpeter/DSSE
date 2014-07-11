@@ -1,1 +1,0 @@
-Dynamic Searchable Symmetric Encryption

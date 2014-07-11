@@ -1,8 +1,0 @@
-Our scheme is an extension of the SSE-1 construction from which is based on the
-inverted index data structure Though SSE-1 is practical it is asnmptotically
-optimal with small constants it does have limitations that make it unsuitable
-for direct use in cryptographic cloud storage systems it is only secure against
-non-adaptive chosen-keyword attacks CKA1 which intuitively means that it
-can only provide security for clients that perform searches in a batch and
-it is not explicitly dynamic i.e. it can only support dynamic operations using
-general and inefficient techniques

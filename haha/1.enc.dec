@@ -1,8 +1,0 @@
-In Figure 1 we show the data structures of our fully-dynamic
-SSE scheme for a specific index The index is built on three documents namely f1
-f2 f3 over three keywords namely w1 w2 w3 all the documents contain keyword w1
-keyword w2 is only contained in document f2 and w3 is contained in documents f2
-and f3 the respective search table Ts the deletion table Td the search array As
-and the deletion array Ad are alse shown in Figure 1 Note that in a real DSSE
-index the would be padding to hide the number of file-word pairs we omit this
-padding for simplicity in this example

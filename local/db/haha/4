@@ -1,5 +1,0 @@
-Searchable symmetric encryption SSE allows a client to encrypt its data in such
-a way that this data can still be searched The most immediate application of
-SSE is to cloud storage where it enables a client to securely outsource its
-data to an untrusted cloud provider without sacrificing the ability to search
-over it
