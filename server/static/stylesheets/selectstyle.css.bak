@@ -1,0 +1,36 @@
+body {height:100%;font:13px Arial, Tahoma, Verdana, Sans-Serif;color:#515151;background:#dbdcdd url(../images/blog_bg.png) repeat-x;}
+
+input {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+}
+
+.file-box {
+	position: relative;
+	width: 340px;
+	text-align:center;
+}
+
+.txt {
+	height: 22px;
+	border: 1px solid #cdcdcd;
+	width: 180px;
+}
+
+.btn {
+	background-color: #FFF;
+	border: 1px solid #CDCDCD;
+	height: 24px;
+	width: 70px;
+}
+
+.file {
+	position: absolute;
+	top: 0;
+	right: 80px;
+	height: 24px;
+	filter: alpha(opacity :   0);
+	opacity: 0;
+	width: 260px;
+}

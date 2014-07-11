@@ -1,0 +1,154 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AD	DSSE_index.py	/^AD = range(1000)$/;"	v
+AS	DSSE_index.py	/^AS = range(1000)$/;"	v
+CalcMD5	DSSE_addtoken.py	/^def CalcMD5(word):$/;"	f
+CalcMD5	DSSE_deltoken.py	/^def CalcMD5(word):$/;"	f
+CalcMD5	DSSE_index.py	/^def CalcMD5(word):$/;"	f
+CalcMD5	DSSE_srchtoken.py	/^def CalcMD5(word):$/;"	f
+CalcMD5	myTool.py	/^def CalcMD5(word):$/;"	f
+CalcSha1	DSSE_addtoken.py	/^def CalcSha1(word):$/;"	f
+CalcSha1	DSSE_deltoken.py	/^def CalcSha1(word):$/;"	f
+CalcSha1	DSSE_index.py	/^def CalcSha1(word):$/;"	f
+CalcSha1	DSSE_srchtoken.py	/^def CalcSha1(word):$/;"	f
+CalcSha1	myTool.py	/^def CalcSha1(word):$/;"	f
+DEBUG	DSSE_index.py	/^DEBUG = {}$/;"	v
+DSSE_addtoken	DSSE_addtoken.py	/^def DSSE_addtoken(username, filename):$/;"	f
+DSSE_deltoken	DSSE_deltoken.py	/^def DSSE_deltoken(username, filename):$/;"	f
+DSSE_index	DSSE_index.py	/^def DSSE_index(parent, filename):$/;"	f
+TD	DSSE_index.py	/^TD = {}$/;"	v
+TDt	DSSE_index.py	/^TDt = {}$/;"	v
+TS	DSSE_index.py	/^TS = {}$/;"	v
+TSt	DSSE_index.py	/^TSt = {}$/;"	v
+ZFile	DSSE_zip.py	/^class ZFile(object):$/;"	c
+__author__	DSSE_addtoken.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_dec.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_deltoken.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_enc.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_gen.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_index.py	/^__author__ = 'Rightpeter'$/;"	v
+__author__	DSSE_srchtoken.py	/^__author__ = 'Rightpeter'$/;"	v
+__init__	DSSE_zip.py	/^    def __init__(self, filename, mode='r', basedir=''):$/;"	m	class:ZFile
+addfile	DSSE_zip.py	/^    def addfile(self, path, arcname=None):$/;"	m	class:ZFile
+addfiles	DSSE_zip.py	/^    def addfiles(self, paths):$/;"	m	class:ZFile
+close	DSSE_zip.py	/^    def close(self):$/;"	m	class:ZFile
+content	DSSE_dec.py	/^        content = enc(encfile)$/;"	v
+create	DSSE_zip.py	/^def create(zfile, files):$/;"	f
+dec_pattern	DSSE_addtoken.py	/^dec_pattern = re.compile(r'.*\\.dec')$/;"	v
+dec_pattern	DSSE_dec.py	/^dec_pattern = re.compile(r'.*\\.dec$')$/;"	v
+dec_pattern	DSSE_deltoken.py	/^dec_pattern = re.compile(r'.*\\.dec')$/;"	v
+dec_pattern	DSSE_enc.py	/^dec_pattern = re.compile(r'.*\\.dec$')$/;"	v
+dec_pattern	DSSE_index.py	/^dec_pattern = re.compile(r'.*\\.dec')$/;"	v
+dec_pattern	DSSE_srchtoken.py	/^dec_pattern = re.compile(r'.*\\.dec')$/;"	v
+enc	DSSE_dec.py	/^def enc(crypto):$/;"	f
+enc	DSSE_enc.py	/^def enc(file_path):$/;"	f
+enc_pattern	DSSE_addtoken.py	/^enc_pattern = re.compile(r'.*\\.enc')$/;"	v
+enc_pattern	DSSE_dec.py	/^enc_pattern = re.compile(r'.*\\.enc$')$/;"	v
+enc_pattern	DSSE_deltoken.py	/^enc_pattern = re.compile(r'.*\\.enc')$/;"	v
+enc_pattern	DSSE_enc.py	/^enc_pattern = re.compile(r'.*\\.enc$')$/;"	v
+enc_pattern	DSSE_index.py	/^enc_pattern = re.compile(r'.*\\.enc')$/;"	v
+enc_pattern	DSSE_srchtoken.py	/^enc_pattern = re.compile(r'.*\\.enc')$/;"	v
+enc_pattern	DSSE_zip.py	/^enc_pattern = re.compile(r'.*\\.enc$')$/;"	v
+encfile	DSSE_dec.py	/^        encfile = zf.read(f)$/;"	v
+extract	DSSE_zip.py	/^    def extract(self, filename, path):$/;"	m	class:ZFile
+extract	DSSE_zip.py	/^def extract(zfile, path):$/;"	f
+extract_to	DSSE_zip.py	/^    def extract_to(self, path):$/;"	m	class:ZFile
+f	DSSE_dec.py	/^        f = f.split('.')$/;"	v
+file_path	DSSE_enc.py	/^            file_path = os.path.join(parent, filename)$/;"	v
+file_path	DSSE_index.py	/^            file_path = os.path.join(parent, filename)$/;"	v
+file_path	DSSE_zip.py	/^                file_path = os.path.join(parent, filename)$/;"	v
+filename	DSSE_addtoken.py	/^    filename = sys.argv[2]$/;"	v
+filename	DSSE_deltoken.py	/^    filename = sys.argv[2]$/;"	v
+filename	DSSE_index.py	/^    filename = "#EMPTY#"$/;"	v
+filename_md5	DSSE_index.py	/^    filename_md5 = int(CalcMD5(filename), 16)$/;"	v
+filename_sha1	DSSE_index.py	/^    filename_sha1 = CalcSha1(filename)$/;"	v
+gen	DSSE_gen.py	/^def gen():$/;"	f
+hashlib	DSSE_addtoken.py	/^import hashlib$/;"	i
+hashlib	DSSE_deltoken.py	/^import hashlib$/;"	i
+hashlib	DSSE_index.py	/^import hashlib$/;"	i
+hashlib	DSSE_srchtoken.py	/^import hashlib$/;"	i
+hashlib	myTool.py	/^import hashlib$/;"	i
+keywords_set	DSSE_addtoken.py	/^keywords_set = []$/;"	v
+keywords_set	DSSE_deltoken.py	/^keywords_set = []$/;"	v
+os	DSSE_addtoken.py	/^import os$/;"	i
+os	DSSE_addtoken.py	/^import os.path$/;"	i
+os	DSSE_dec.py	/^import os$/;"	i
+os	DSSE_dec.py	/^import os.path$/;"	i
+os	DSSE_deltoken.py	/^import os$/;"	i
+os	DSSE_deltoken.py	/^import os.path$/;"	i
+os	DSSE_enc.py	/^import os$/;"	i
+os	DSSE_enc.py	/^import os.path$/;"	i
+os	DSSE_index.py	/^import os$/;"	i
+os	DSSE_index.py	/^import os.path$/;"	i
+os	DSSE_srchtoken.py	/^import os$/;"	i
+os	DSSE_srchtoken.py	/^import os.path$/;"	i
+os	DSSE_zip.py	/^import os$/;"	i
+os	DSSE_zip.py	/^import os.path$/;"	i
+path	DSSE_addtoken.py	/^import os.path$/;"	i
+path	DSSE_dec.py	/^import os.path$/;"	i
+path	DSSE_deltoken.py	/^import os.path$/;"	i
+path	DSSE_enc.py	/^import os.path$/;"	i
+path	DSSE_index.py	/^import os.path$/;"	i
+path	DSSE_srchtoken.py	/^import os.path$/;"	i
+path	DSSE_zip.py	/^import os.path$/;"	i
+pickle	DSSE_addtoken.py	/^import pickle$/;"	i
+pickle	DSSE_deltoken.py	/^import pickle$/;"	i
+pickle	DSSE_index.py	/^import pickle$/;"	i
+pickle	DSSE_srchtoken.py	/^import pickle$/;"	i
+pickle_pattern	DSSE_addtoken.py	/^pickle_pattern = re.compile(r'.*\\.pickle')$/;"	v
+pickle_pattern	DSSE_deltoken.py	/^pickle_pattern = re.compile(r'.*\\.pickle')$/;"	v
+pickle_pattern	DSSE_enc.py	/^pickle_pattern = re.compile(r'.*\\.pickle$')$/;"	v
+pickle_pattern	DSSE_index.py	/^pickle_pattern = re.compile(r'.*\\.pickle')$/;"	v
+pickle_pattern	DSSE_zip.py	/^pickle_pattern = re.compile(r'.*\\.pickle$')$/;"	v
+random	DSSE_addtoken.py	/^import random$/;"	i
+random	DSSE_deltoken.py	/^import random$/;"	i
+random	DSSE_index.py	/^import random$/;"	i
+random	DSSE_srchtoken.py	/^import random$/;"	i
+re	DSSE_addtoken.py	/^import re$/;"	i
+re	DSSE_dec.py	/^import re$/;"	i
+re	DSSE_deltoken.py	/^import re$/;"	i
+re	DSSE_enc.py	/^import re$/;"	i
+re	DSSE_index.py	/^import re$/;"	i
+re	DSSE_srchtoken.py	/^import re$/;"	i
+re	DSSE_zip.py	/^import re $/;"	i
+rootdir	DSSE_enc.py	/^    rootdir = os.path.join(os.getcwd(), 'db', sys.argv[1])$/;"	v
+rootdir	DSSE_index.py	/^    rootdir = os.path.join(os.getcwd(), sys.argv[1])$/;"	v
+rootdir	DSSE_zip.py	/^    rootdir = os.path.join(os.getcwd(), sys.argv[1])$/;"	v
+rsa	DSSE_addtoken.py	/^import rsa$/;"	i
+rsa	DSSE_dec.py	/^import rsa$/;"	i
+rsa	DSSE_deltoken.py	/^import rsa$/;"	i
+rsa	DSSE_enc.py	/^import rsa$/;"	i
+rsa	DSSE_gen.py	/^import rsa$/;"	i
+rsa	DSSE_index.py	/^import rsa$/;"	i
+rsa	DSSE_srchtoken.py	/^import rsa$/;"	i
+sxor	DSSE_index.py	/^def sxor(s1, s2):$/;"	f
+sys	DSSE_addtoken.py	/^import sys$/;"	i
+sys	DSSE_dec.py	/^import sys$/;"	i
+sys	DSSE_deltoken.py	/^import sys$/;"	i
+sys	DSSE_enc.py	/^import sys$/;"	i
+sys	DSSE_index.py	/^import sys$/;"	i
+sys	DSSE_srchtoken.py	/^import sys$/;"	i
+sys	DSSE_zip.py	/^import sys$/;"	i
+tmp_TD	DSSE_index.py	/^    tmp_TD = range(1000)$/;"	v
+tmp_TS	DSSE_index.py	/^    tmp_TS = range(1000)$/;"	v
+tmpdir	DSSE_dec.py	/^    tmpdir = os.path.join(os.getcwd(), 'tmp')$/;"	v
+tmpdir	DSSE_srchtoken.py	/^    tmpdir = os.path.join(os.getcwd(), 'tmp', username)$/;"	v
+user	DSSE_zip.py	/^    user = sys.argv[1]$/;"	v
+userdir	DSSE_dec.py	/^    userdir = os.path.join(tmpdir, username)$/;"	v
+username	DSSE_addtoken.py	/^    username = sys.argv[1]$/;"	v
+username	DSSE_dec.py	/^    username = sys.argv[1]$/;"	v
+username	DSSE_deltoken.py	/^    username = sys.argv[1]$/;"	v
+username	DSSE_srchtoken.py	/^    username = sys.argv[1]$/;"	v
+word	DSSE_index.py	/^    word = "#EMPTY#"$/;"	v
+word	DSSE_srchtoken.py	/^    word = sys.argv[2]$/;"	v
+word_md5	DSSE_index.py	/^    word_md5 = int(CalcMD5(word), 16)$/;"	v
+word_sha1	DSSE_index.py	/^    word_sha1 = CalcSha1(word)$/;"	v
+zf	DSSE_dec.py	/^    zf = zipfile.ZipFile(os.path.join(userdir, username+'_search.zip'), 'r')$/;"	v
+zf	DSSE_zip.py	/^    zf = zipfile.ZipFile(os.path.join(rootdir,'upload.zip'), 'w')$/;"	v
+zip_pattern	DSSE_enc.py	/^zip_pattern = re.compile(r'.*\\.zip$')$/;"	v
+zipfile	DSSE_dec.py	/^import zipfile$/;"	i
+zipfile	DSSE_zip.py	/^import zipfile$/;"	i
