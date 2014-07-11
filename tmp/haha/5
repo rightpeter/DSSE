@@ -1,0 +1,8 @@
+To search for a keyword w the client generates a search token tw and given tw r
+and c the server can find the identifiers Iw of the files that contain w from
+these identifiers it can recover the appropriate ciphertexts cw notice that the
+provider learns som limited information about the clients query in particular
+it knows that whatever keyword is being searched for is contained in the files
+encrypted as Cw There are ways to hide even this information most notably using
+the work of Goldreich and Ostrovsky on oblivious RAMs but such an approach
+leads to inefficient schemes
