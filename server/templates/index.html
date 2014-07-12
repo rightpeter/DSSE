@@ -40,9 +40,55 @@
 <!-- intro text --> 
 <div class="intro_text">
  <div class="wraper">
-  <h1>welcome to our website</h1>
-  <div><a href="#">This is a cloud disk  <span>Go ahead. <span>Clicky.</span></span></a></div>
-  <p><span>We are students of Network Engineering, Dalian University of Technology.We design this website to implement a file storage system based on the Searchable symmetric encryption theory.</span></p>
+  <h1>how to use dsse</h1>
+  <div><a href="/static/download/client.zip">Download Client Python Script  <span>Go ahead. <span>Clicky.</span></span></a></div>
+  <p><span>This a simple implementation of DSSE designed by <br><br>
+
+      Seny Kamara - Microsoft Research<br>
+      Charalampos Papamanthou - UC Berkeley<br>
+      Tom Roeder - Microsoft Research<br><br>
+
+      in Dynamic Searchable Symmetric Encryption.<br><br>
+
+      Usage<br>
+      -----------------------------------------------------------<br>
+      DSSE Client includes 8 main python scriptions.<br> 
+You can put your own files in db/(your id)/.<br>
+<br>
+### DSSE_gen.py<br>
+    This script generate public and private key of RSA.<br>
+<br>
+### DSSE_enc.py<br>
+    Example: python DSSE_enc.py haha<br>
+    This script encrypts files in db/haha/*.<br>
+<br>
+### DSSE_index.py<br>
+    Example: python DSSE_index.py haha<br>
+    This script creates the index of files db/haha/*.<br>
+
+### DSSE_addtoken.py<br>
+    Example: python DSSE_addtoken.py haha 5<br>
+    This script creates add token of file db/haha/5. <br>
+<br>
+### DSSE_srchtoken.py<br>
+    Example: python DSSE_srchtoken.py haha even<br>
+    This script creates search token of word for haha.<br>
+<br>
+### DSSE_deltoken.py<br>
+    Example: python DSSE_deltoken.py haha 5<br>
+    This script creates del token of file 5 in haha.<br>
+<br>
+### DSSE_zip.p<br>
+    Example: python DSSE_zip.py hah<br>
+    This script creates a zip file for db/haha/*.<br>
+    The zip file will be uploaded to server later<br>.
+<br>
+### DSSE_dec.py<br>
+    Example: python DSSE_dec.py haha even<br>
+    This script deciphers the search result of word even and <br>
+    puts result in folder db/haha/even<br>
+</span></p>
+
  </div>
 </div>
 <!-- /intro text -->
