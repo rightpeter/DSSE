@@ -7,7 +7,6 @@ import os
 import os.path
 import re
 import zipfile
-from myTool import *
 
 enc_pattern = re.compile(r'.*\.enc$')
 dec_pattern = re.compile(r'.*\.dec$')
@@ -41,32 +40,21 @@ def dec(crypto):
 if __name__ == '__main__':
     print 'argv[0]: ', sys.argv[0]
     print 'argv[1]: ', sys.argv[1]
-    print 'argv[2]: ', sys.argv[2]
 
     username = sys.argv[1]
-    word = sys.argv[2]
-    tmpdir = os.path.join(os.getcwd(), 'tmp', username)
-    userdir = os.path.join(os.getcwd(), 'db', username, word)
+    tmpdir = os.path.join(os.getcwd(), 'tmp')
+    userdir = os.path.join(tmpdir, username)
+    if len(sys.argv) == 3: 
 
-    if os.path.isdir(userdir):
-        for parent, dirnames, filenames in os.walk(userdir):
-            for filename in filenames:
-                os.remove(os.path.join(parent, filename))
-    else:
+
+    if not os.path.isdir(userdir):
         os.makedirs(userdir)
 
-    try:
-        word_sha1 = CalcSha1(word) 
-        zf = zipfile.ZipFile(os.path.join(tmpdir, word_sha1+'_search.zip'), 'r')
-        for f in zf.namelist():
-            if enc_pattern.match(f):
-                encfile = zf.read(f)
-                f = f.split('.')
-                content = dec(encfile)
-                with open(os.path.join(userdir, f[0]), 'w+') as outputfile:
-                    outputfile.write(content)
-                    outputfile.close()
-        os.remove(os.path.join(tmpdir, word_sha1+'_search.zip'))
-    except Exception, e:
-        print e
-        print 'No Folder!'
+    zf = zipfile.ZipFile(os.path.join(userdir, username+'_search.zip'), 'r')
+    for f in zf.namelist():
+        encfile = zf.read(f)
+        f = f.split('.')
+        content = dec(encfile)
+        with open(os.path.join(userdir, f[0]), 'w+') as outputfile:
+            outputfile.write(content)
+            outputfile.close()

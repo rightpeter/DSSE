@@ -45,7 +45,7 @@ def DSSE_search(username, word_sha1, word_md5):
     if not os.path.isdir(tmpdir):
         os.makedirs(tmpdir)
 
-    zf = zipfile.ZipFile(os.path.join(tmpdir, 'search.zip'), 'w')
+    zf = zipfile.ZipFile(os.path.join(tmpdir, word_sha1+'_search.zip'), 'w')
     for f in file_list:
         filename = str(f)+'.enc'
         zf.write(os.path.join(dbdir, filename), filename)

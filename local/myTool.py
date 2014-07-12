@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
+import re
+
+enc_pattern = re.compile(r'.*\.enc$')
+dec_pattern = re.compile(r'.*\.dec$')
+pickle_pattern = re.compile(r'.*\.dec$')
 
 def CalcSha1(word):
     sha1obj = hashlib.sha1()

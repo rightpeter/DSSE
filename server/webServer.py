@@ -72,12 +72,12 @@ class SearchHandler(tornado.web.RequestHandler):
 
     def post(self):
         username = self.get_argument('username')
-        self.set_header('Content-Type', 'application-zip')
-        self.set_header('Content-Disposition', 'attachment;filename=%s_search.zip' % username)
         word = self.get_argument('word')
+        self.set_header('Content-Type', 'application-zip')
+        self.set_header('Content-Disposition', 'attachment;filename=%s_search.zip' % CalcSha1(word))
         file_list = DSSE_search(username, CalcSha1(word), int(CalcMD5(word), 16))
         tmpdir = os.path.join(os.getcwd(), 'static/tmp/'+username)
-        with open(os.path.join(tmpdir, 'search.zip'), 'r') as inputfile:
+        with open(os.path.join(tmpdir, CalcSha1(word)+'_search.zip'), 'r') as inputfile:
             content = inputfile.read()
             self.write(content)
 
