@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#encoding: utf-8
+# encoding: utf-8
 
 import tornado.web
 import tornado.ioloop
@@ -13,7 +13,7 @@ from myTool import *
 
 from tornado.options import define, options
 
-define("port", default=2358, help="run on the given port", type=int)
+define("port", default=8089, help="run on the given port", type=int)
 
 
 class Application(tornado.web.Application):
@@ -35,13 +35,16 @@ class Application(tornado.web.Application):
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
 
+
 class WorkHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("work.html")
+
 
 class AddHandler(tornado.web.RequestHandler):
     def get(self):
@@ -55,6 +58,7 @@ class AddHandler(tornado.web.RequestHandler):
         DSSE_add(username, add_token, enc_file)
         self.write('Add Successfully!')
 
+
 class DeleteHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("delete.html")
@@ -66,6 +70,7 @@ class DeleteHandler(tornado.web.RequestHandler):
         DSSE_del(username, filename)
         self.write('Delete Successfully!')
 
+
 class SearchHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("search.html")
@@ -76,17 +81,18 @@ class SearchHandler(tornado.web.RequestHandler):
         self.set_header('Content-Type', 'application-zip')
         self.set_header('Content-Disposition', 'attachment;filename=%s_search.zip' % CalcSha1(word))
         file_list = DSSE_search(username, CalcSha1(word), int(CalcMD5(word), 16))
-        tmpdir = os.path.join(os.getcwd(), 'static/tmp/'+username)
-        with open(os.path.join(tmpdir, CalcSha1(word)+'_search.zip'), 'r') as inputfile:
+        tmpdir = os.path.join(os.getcwd(), 'static/tmp/' + username)
+        with open(os.path.join(tmpdir, CalcSha1(word) + '_search.zip'), 'r') as inputfile:
             content = inputfile.read()
             self.write(content)
+
 
 class SearchFileHandler(tornado.web.RequestHandler):
     def post(self):
         username = self.get_argument('username')
         srchtoken = self.request.files['myfile'][0]['body']
         print self.request.files['myfile'][0]['filename']
-        srchtoken = srchtoken.split() 
+        srchtoken = srchtoken.split()
         file_list = DSSE_search(username, srchtoken[1], int(srchtoken[2], 16))
         print file_list
         self.write(str(file_list))
@@ -96,6 +102,7 @@ class TextFullHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("text_full.html")
 
+
 class UploadHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("upload.html")
@@ -103,18 +110,18 @@ class UploadHandler(tornado.web.RequestHandler):
     def post(self):
         username = self.get_argument('username')
         rootdir = os.getcwd()
-        parent = os.path.join(rootdir, 'static/db/'+username)
+        parent = os.path.join(rootdir, 'static/db/' + username)
         print parent
         if not os.path.isdir(parent):
             print 'mkdir'
             os.makedirs(parent)
         else:
             self.write('Username Already Exist!')
-            return 
-        
+            return
+
         if self.request.files:
             upload_file = self.request.files['myfile'][0]
-            with open(parent+'/zipfile.zip', 'w') as uploadfile:
+            with open(parent + '/zipfile.zip', 'w') as uploadfile:
                 uploadfile.write(upload_file['body'])
 
             zf = zipfile.ZipFile(os.path.join(parent, 'zipfile.zip'), 'r')
@@ -122,6 +129,7 @@ class UploadHandler(tornado.web.RequestHandler):
             zf.close()
 
         self.write('Upload Successful!')
+
 
 class TestHandler(tornado.web.RequestHandler):
     def get(self):
@@ -133,7 +141,8 @@ class TestHandler(tornado.web.RequestHandler):
         with open(parent, 'r') as inputfile:
             input = inputfile.read()
             self.write(input)
-        
+
+
 def main():
     app = Application()
     app.listen(options.port)
