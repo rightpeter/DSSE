@@ -3,11 +3,13 @@
 
 import hashlib
 
+
 def CalcSha1(word):
     sha1obj = hashlib.sha1()
     sha1obj.update(word)
     hash = sha1obj.hexdigest()
     return hash
+
 
 def CalcMD5(word):
     md5obj = hashlib.md5()
@@ -15,3 +17,6 @@ def CalcMD5(word):
     hash = md5obj.hexdigest()
     return hash
 
+
+def sxor(s1, s2):
+    return ''.join(chr(ord(a) ^ ord(b)) for a, b in zip(s1, s2))
