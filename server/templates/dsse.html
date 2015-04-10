@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-  </head>
-</html>
+{% extends "base.html" %}
+{% block icon_url %}/static/favicon.icon{% end %}
+{% block title %}DSSE Cloud Service{% end %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-3" style="margin-top:50px">
+            <div class="btn-group-vertical">
+                <a class="btn btn-large btn-block btn-primary" href="/upload">Upload</a>
+                <a class="btn btn-large btn-block btn-primary" href="/search">Search</a>
+                <a class="btn btn-large btn-block btn-primary" href="/add">Add</a>
+                <a class="btn btn-large btn-block btn-primary" href="/delete">Delete</a>
+            </div>
+        </div>
+    </div>
+{% end %}

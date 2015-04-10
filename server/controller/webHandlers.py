@@ -18,13 +18,17 @@ class MainHandler(BaseHandler):
         user = self.get_current_user()
         self.set_cookie('url', self.request.uri)
         url = self.request.uri
-        
+
         self.render("index.html", user=user, url=url)
 
 
 class DSSEHandler(BaseHandler):
     def get(self):
-        self.render('dsse.html')
+        user = self.get_current_user()
+        self.set_cookie('url', self.request.uri)
+        url = self.request.uri
+
+        self.render('dsse.html', user=user, url=url)
 
 
 class DownloadHandler(BaseHandler):

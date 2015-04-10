@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block description %}Default Description{% end %}">
+        <meta name="author" content="{% block author %}Rightpeter{% end %}"
+        <link rel="icon" href="{% block icon_url %}{% end %}">
+        <title>{% block title %}Welcome!{% end %}</title>
+        <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/justified-nav.css" rel="stylesheet">
+        <link href="/static/flat-ui/css/flat-ui.css" rel="stylesheet">
+        <link href="/static/js/jquery.min.js"></script>
+        <script src="/static/dist/js/bootstrap.min.js"></script>
+        {% block head %}{% end %}
+    </head>
+
+    <body bgcolor="black">
+        {% module NavbarDSSE(user, url) %}
+        <div class="container">
+            <div class="jumbotron">
+                {% block body %} {% end %}
+            </div>
+        </div>
+        <footer class="footer">
+            {% block footer %}
+                <div class="jumbotron">
+                    <div class="span7">
+                        <p>&copy; Rightpeter 2015/4</p>
+                    </div>
+                </div>
+            {% end %}
+        </footer>
+    </body>
+    {% block script %}{% end %}
+</html>
