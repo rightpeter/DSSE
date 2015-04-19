@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 {% block icon_url %}/static/favicon.icon{% end %}
 {% block title %}DSSE Cloud Service{% end %}
+{% block head %}
+    <link href="/static/css/dropzone.css" rel="stylesheet">
+    <script src="/static/js/dropzone.min.js"></script>
+{% end %}
 {% block body %}
     <div class="row">
         <div class="col-md-3" style="margin-top:50px">
             <div class="btn-group-vertical">
-                <a class="btn btn-large btn-block btn-primary" href="/upload">Upload</a>
-                <a class="btn btn-large btn-block btn-primary" href="/search">Search</a>
-                <a class="btn btn-large btn-block btn-primary" href="/add">Add</a>
-                <a class="btn btn-large btn-block btn-primary" href="/delete">Delete</a>
+                <a class="btn btn-large btn-block btn-primary" href="/dsse?action=upload">Upload</a>
+                <a class="btn btn-large btn-block btn-primary" href="/dsse?action=search">Search</a>
+                <a class="btn btn-large btn-block btn-primary" href="/dsse?action=add">Add</a>
+                <a class="btn btn-large btn-block btn-primary" href="/dsse?action=delete">Delete</a>
             </div>
+        </div>
+        <div class="col-md-9">
+            {% if content == 'upload' %}
+                {% include upload.html %}
+            {% elif content == 'search' %}
+                {% include search.html %}
+            {% elif content == 'add' %}
+                {% include add.html %}
+            {% elif content == 'delete' %}
+                {% include delete.html %}
+            {% end %}
+
         </div>
     </div>
 {% end %}

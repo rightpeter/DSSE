@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import tornado.web
 from operation.dsseCore import DSSE_add, DSSE_del, DSSE_search
+from util.myTool import CalcSha1, CalcMD5
 
 
 class AddHandler(tornado.web.RequestHandler):

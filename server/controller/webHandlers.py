@@ -3,6 +3,7 @@
 
 import tornado.web
 import os
+import zipfile
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -27,8 +28,9 @@ class DSSEHandler(BaseHandler):
         user = self.get_current_user()
         self.set_cookie('url', self.request.uri)
         url = self.request.uri
+        content = self.get_argument('action', 'upload')
 
-        self.render('dsse.html', user=user, url=url)
+        self.render('dsse.html', user=user, url=url, content=content)
 
 
 class DownloadHandler(BaseHandler):
@@ -37,10 +39,8 @@ class DownloadHandler(BaseHandler):
 
 
 class UploadHandler(BaseHandler):
-    def get(self):
-        self.render("upload.html")
-
     def post(self):
+        print 'hehe'
         username = self.get_argument('username')
         rootdir = os.getcwd()
         parent = os.path.join(rootdir, 'static/db/' + username)
