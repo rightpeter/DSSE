@@ -13,14 +13,15 @@ import pickle
 enc_pattern = re.compile(r'.*\.enc')
 dec_pattern = re.compile(r'.*\.dec')
 pickle_pattern = re.compile(r'.*\.pickle')
+zip_pattern = re.compile(r'.*\.zip')
 
 DEBUG = {}
 TS = {}
-TSt = {}
 TD = {}
-TDt = {}
 AS = range(1000)
 AD = range(1000)
+tmp_TS = range(1000)
+tmp_TD = range(1000)
 
 def CalcSha1(word):
     sha1obj = hashlib.sha1()
@@ -41,13 +42,13 @@ def DSSE_index(parent, filename):
     file_path = os.path.join(parent, filename)
     filename_sha1 = CalcSha1(filename)
     filename_md5 = int(CalcMD5(filename), 16)
-    print '-----------------index------------------\n'
+    # print '-----------------index------------------\n'
     with open(file_path) as inputfile:
         raw_content = inputfile.read()
     
     spli = raw_content.split()
     keywords = list(set(spli))
-    print 'keywords: ', keywords 
+    # print 'keywords: ', keywords 
     TD[filename_sha1] = -1 ^ filename_md5
 
     for word in keywords:
@@ -62,32 +63,26 @@ def DSSE_index(parent, filename):
         AS[tmp_TS[0]] = [int(filename) ^ word_md5, head]
         TS[word_sha1] = tmp_TS[0] ^ word_md5
 
-        print 'word: ', word, 'filename: ', filename, 'sxor: ', sxor(word, CalcMD5(filename)), 'i: ', tmp_TS[0]
+        # print 'word: ', word, 'filename: ', filename, 'sxor: ', sxor(word, CalcMD5(filename)), 'i: ', tmp_TS[0]
         AD[tmp_TD[0]] = [sxor(word, CalcMD5(filename)), TD[filename_sha1]]
         #AD[tmp_TD[0]] = [word ^ filename_md5, TD[filename_sha1]]
         TD[filename_sha1] = tmp_TD[0] ^ filename_md5
         del tmp_TS[0]
         del tmp_TD[0]
 
-if __name__ == '__main__':
-    print 'argv[0]: ', sys.argv[0]
-    print 'argv[1]: ', sys.argv[1]
-    rootdir = os.path.join(os.getcwd(), 'db', sys.argv[1])
-    print rootdir
-
-    tmp_TS = range(1000)
-    random.shuffle(tmp_TS) 
-    tmp_TD = range(1000)
-    random.shuffle(tmp_TD)
+def index(rootdir):
     
+    random.shuffle(tmp_TS) 
+    random.shuffle(tmp_TD)
+
     for parent, dirnames, filenames in os.walk(rootdir):
         for filename in filenames:
-            print "parent is:" + parent
-            print "filename is:" + filename
+            # print "parent is:" + parent
+            # print "filename is:" + filename
             file_path = os.path.join(parent, filename)
-            print "the full name of the file is:" + file_path
+            # print "the full name of the file is:" + file_path
             if not ( enc_pattern.match(filename) or dec_pattern.match(filename)
-                    or pickle_pattern.match(filename)):
+                    or pickle_pattern.match(filename) or zip_pattern.match(filename)):
                 DSSE_index(parent, filename)
 
     word = "#EMPTY#"
@@ -108,21 +103,22 @@ if __name__ == '__main__':
         TD[filename_sha1] = tmp_TD[0] ^ filename_md5
         del tmp_TD[0]
 
-    with open(os.path.join(parent, 'TS.pickle'), 'w+') as outputfile:
+    with open(os.path.join(rootdir, 'TS.pickle'), 'w+') as outputfile:
         pickle.dump(TS, outputfile)
 
-    with open(os.path.join(parent, 'TD.pickle'), 'w+') as outputfile:
+    with open(os.path.join(rootdir, 'TD.pickle'), 'w+') as outputfile:
         pickle.dump(TD, outputfile)
 
-    with open(os.path.join(parent, 'AS.pickle'), 'w+') as outputfile:
+    with open(os.path.join(rootdir, 'AS.pickle'), 'w+') as outputfile:
         pickle.dump(AS, outputfile)
 
-    with open(os.path.join(parent, 'AD.pickle'), 'w+') as outputfile:
+    with open(os.path.join(rootdir, 'AD.pickle'), 'w+') as outputfile:
         pickle.dump(AD, outputfile)
 
-    print TS
-    print TD
-    print AS
-    print AD
-    print DEBUG
-    print AD[474]
+
+if __name__ == '__main__':
+    # print 'argv[0]: ', sys.argv[0]
+    # print 'argv[1]: ', sys.argv[1]
+    rootdir = os.path.join(os.getcwd(), 'db', sys.argv[1])
+    
+    index(rootdir)

@@ -12,11 +12,11 @@ dec_pattern = re.compile(r'.*\.dec$')
 pickle_pattern = re.compile(r'.*\.pickle$')
 zip_pattern = re.compile(r'.*\.zip$')
 
-def enc(file_path):
+def DSSE_enc(file_path):
     with open(file_path) as inputfile:
         content = inputfile.read()
     
-    print 'content: ', content
+    # print 'content: ', content
     #content = content[:245]
     with open('public.pem') as publickfile:
         p = publickfile.read()
@@ -27,38 +27,43 @@ def enc(file_path):
         privkey= rsa.PrivateKey.load_pkcs1(p)
     
     crypto = ''
-    print '========start========='
+    # print '========start========='
     while content:
         message = content[:245]
         content = content[245:]
         
         enc_message = rsa.encrypt(message, pubkey)
         crypto += enc_message
-        print '-----------------message: -------------\n', message
-        print '-----------------content: -------------\n', content
-        print '-----------------enc_message: ---------\n', enc_message
-        print '-----------------crypto: --------------\n', crypto
+        # print '-----------------message: -------------\n', message
+        # print '-----------------content: -------------\n', content
+        # print '-----------------enc_message: ---------\n', enc_message
+        # print '-----------------crypto: --------------\n', crypto
 
     #crypto = rsa.encrypt(content, pubkey)
-    print 'crypto: ', crypto
+    # print 'crypto: ', crypto
     
     with open(file_path+'.enc', 'w+') as outputfile:
         outputfile.write(crypto)
         outputfile.close()
-        
-if __name__ == '__main__':
-    print 'argv[0]: ', sys.argv[0]
-    print 'argv[1]: ', sys.argv[1]
-    rootdir = os.path.join(os.getcwd(), 'db', sys.argv[1])
-    print rootdir
+   
+
+def enc(rootdir):
     for parent, dirnames, filenames in os.walk(rootdir):
         for filename in filenames:
-            print "parent is:" + parent
-            print "filename is:" + filename
+            # print "parent is:" + parent
+            # print "filename is:" + filename
             file_path = os.path.join(parent, filename)
-            print "the full name of the file is:" + file_path
+            # print "the full name of the file is:" + file_path
             if not (enc_pattern.match(file_path) or
                     dec_pattern.match(file_path) or
                     pickle_pattern.match(filename) or
                     zip_pattern.match(filename)):
-                enc(file_path)
+                DSSE_enc(file_path)
+
+
+if __name__ == '__main__':
+    # print 'argv[0]: ', sys.argv[0]
+    # print 'argv[1]: ', sys.argv[1]
+    rootdir = os.path.join(os.getcwd(), 'db', sys.argv[1])
+
+    enc(rootdir)
