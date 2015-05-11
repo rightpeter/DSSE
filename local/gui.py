@@ -1,9 +1,10 @@
-#----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # A very simple wxPython example.  Just a wx.Frame, wx.Panel,
 # wx.StaticText, wx.Button, and a wx.BoxSizer, but it shows the basic
 # structure of any wxPython application.
-#----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 
+import os
 import wx
 import traceback
 import myTools
@@ -11,13 +12,17 @@ import DSSE_gen
 import DSSE_index
 import DSSE_enc
 import DSSE_zip
+import DSSE_srchtoken
+import DSSE_addtoken
+import DSSE_deltoken
+import DSSE_srchdec
 
 wx.ID_SET_USER = 2358
 wx.EVT_FRESH = 358
 
 
 class GenPanel(wx.Panel):
-    def __init__(self, parent):        
+    def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.parent = parent
 
@@ -62,10 +67,9 @@ class GenPanel(wx.Panel):
         path = self.dir_path.GetValue()
         print 'Dir: ', path
         if DSSE_gen.gen(path):
-        	now = myTools.GetNowString()
-        	myTools.SetLastGenTime(now)
-        	self.last_gen_time_text.SetValue(str(now))
-
+            now = myTools.GetNowString()
+            myTools.SetLastGenTime(now)
+            self.last_gen_time_text.SetValue(str(now))
 
 
 class ZipPanel(wx.Panel):
@@ -74,9 +78,9 @@ class ZipPanel(wx.Panel):
         self.parent = parent
 
         sizer = wx.FlexGridSizer(cols=3, hgap=5, vgap=5)
-        
-        self.usernameText = wx.TextCtrl(self, -1, "", style=wx.TE_READONLY)
-        sizer.Add(wx.StaticText(self, -1, "Username:"))
+
+        self.usernameText = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
+        sizer.Add(wx.StaticText(self, -1, 'Username:'))
         sizer.Add(self.usernameText)
         self.LoadUsername()
         self.freshButton = wx.Button(self, label='Fresh')
@@ -86,7 +90,7 @@ class ZipPanel(wx.Panel):
         self.dir_path = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
         self.select_dir_button = wx.Button(self, label='Choose Dir')
         self.Bind(wx.EVT_BUTTON, self.OpenDir, self.select_dir_button)
-        sizer.Add(wx.StaticText(self, -1, 'Key Dir:'))
+        sizer.Add(wx.StaticText(self, -1, 'File Dir:'))
         sizer.Add(self.dir_path)
         sizer.Add(self.select_dir_button)
 
@@ -126,25 +130,114 @@ class SearchPanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.parent = parent
-        
-        self.quote = wx.StaticText(self, label='Search')
-        self.username = wx.StaticText(self, label=myTools.GetUserName())
+
+        sizer = wx.FlexGridSizer(cols=3, hgap=5, vgap=5)
+
+        self.usernameText = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
+        sizer.Add(wx.StaticText(self, -1, 'Username:'))
+        sizer.Add(self.usernameText)
+        self.LoadUsername()
+        self.freshButton = wx.Button(self, label='Fresh')
+        self.Bind(wx.EVT_BUTTON, self.OnFresh, self.freshButton)
+        sizer.Add(self.freshButton)
+
+        self.search_word = wx.TextCtrl(self, -1, '')
+        sizer.Add(wx.StaticText(self, -1, 'Search Word:'))
+        sizer.Add(self.search_word)
+        sizer.Add((-1, -1))
+
+        self.srchtoken_button = wx.Button(self, label='Srchtoken')
+        self.Bind(wx.EVT_BUTTON, self.Srchtoken, self.srchtoken_button)
+        sizer.Add(self.srchtoken_button)
+        sizer.Add((-1, -1))
+        sizer.Add((-1, -1))
+
+        self.srchdec_button = wx.Button(self, label='Srchdec')
+        self.Bind(wx.EVT_BUTTON, self.Srchdec, self.srchdec_button)
+        tmp_str = 'Put the zip file at .../tmp/%s/' % self.usernameText.GetValue()
+        sizer.Add(wx.StaticText(self, -1, tmp_str))
+        sizer.Add(self.srchdec_button)
+        sizer.Add((-1, -1))
+
+        border = wx.BoxSizer()
+        border.Add(sizer, 0, wx.ALL, 20)
+        self.SetSizer(border)
+
+    def LoadUsername(self):
+        username = myTools.GetUserName()
+        self.usernameText.SetValue(str(username))
+
+    def OnFresh(self, event):
+        self.LoadUsername()
+
+    def Srchtoken(self, event):
+        username = self.usernameText.GetValue()
+        word = self.search_word.GetValue()
+        DSSE_srchtoken.srchtoken(username, word)
+
+    def Srchdec(self, event):
+        username = self.usernameText.GetValue()
+        word = self.search_word.GetValue()
+        DSSE_srchdec.srchdec(username, word)
 
 
 class AddPanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.parent = parent
-        
-        self.quote = wx.StaticText(self, label='Add')
-        self.username = wx.StaticText(self, label=myTools.GetUserName())
 
+        sizer = wx.FlexGridSizer(cols=3, hgap=5, vgap=5)
+
+        self.usernameText = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
+        sizer.Add(wx.StaticText(self, -1, 'Username:'))
+        sizer.Add(self.usernameText)
+        self.LoadUsername()
+        self.freshButton = wx.Button(self, label='Fresh')
+        self.Bind(wx.EVT_BUTTON, self.OnFresh, self.freshButton)
+        sizer.Add(self.freshButton)
+
+        self.file_path = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
+        self.select_file_button = wx.Button(self, label='Choose File')
+        self.Bind(wx.EVT_BUTTON, self.ChooseFile, self.select_file_button)
+        sizer.Add(wx.StaticText(self, -1, 'File Dir:'))
+        sizer.Add(self.file_path)
+        sizer.Add(self.select_file_button)
+
+        self.addtoken_button = wx.Button(self, label='AddToken')
+        self.Bind(wx.EVT_BUTTON, self.AddToken, self.addtoken_button)
+        sizer.Add(self.addtoken_button)
+        sizer.Add((-1, -1))
+        sizer.Add((-1, -1))
+
+        border = wx.BoxSizer()
+        border.Add(sizer, 0, wx.ALL, 20)
+        self.SetSizer(border)
+
+    def LoadUsername(self):
+        username = myTools.GetUserName()
+        self.usernameText.SetValue(str(username))
+
+    def OnFresh(self, event):
+        self.LoadUsername()
+
+    def ChooseFile(self, event):
+        dlg = wx.FileDialog(self, 'Choose a file:', os.getcwd(), style=wx.OPEN)
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            self.file_path.SetValue(str(path))
+        dlg.Destroy()
+
+    def AddToken(self, event):
+        username = self.usernameText.GetValue()
+        file_path = self.file_path.GetValue()
+        DSSE_addtoken.addtoken(username, file_path)
+        DSSE_enc.DSSE_enc(file_path)
 
 class DecPanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.parent = parent
-        
+
         self.quote = wx.StaticText(self, label='Dec')
         self.username = wx.StaticText(self, label=myTools.GetUserName())
 
@@ -153,10 +246,43 @@ class DeletePanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         self.parent = parent
-        
-        self.quote = wx.StaticText(self, label='Delete')
-        self.username = wx.StaticText(self, label=myTools.GetUserName())
 
+        sizer = wx.FlexGridSizer(cols=3, hgap=5, vgap=5)
+
+        self.usernameText = wx.TextCtrl(self, -1, '', style=wx.TE_READONLY)
+        sizer.Add(wx.StaticText(self, -1, 'Username:'))
+        sizer.Add(self.usernameText)
+        self.LoadUsername()
+        self.freshButton = wx.Button(self, label='Fresh')
+        self.Bind(wx.EVT_BUTTON, self.OnFresh, self.freshButton)
+        sizer.Add(self.freshButton)
+
+        self.filename = wx.TextCtrl(self, -1, '')
+        sizer.Add(wx.StaticText(self, -1, 'File Name:'))
+        sizer.Add(self.filename)
+        sizer.Add((-1, -1))
+
+        self.deltoken_button = wx.Button(self, label='Deltoken')
+        self.Bind(wx.EVT_BUTTON, self.Deltoken, self.deltoken_button)
+        sizer.Add(self.deltoken_button)
+        sizer.Add((-1, -1))
+        sizer.Add((-1, -1))
+
+        border = wx.BoxSizer()
+        border.Add(sizer, 0, wx.ALL, 20)
+        self.SetSizer(border)
+
+    def LoadUsername(self):
+        username = myTools.GetUserName()
+        self.usernameText.SetValue(str(username))
+
+    def OnFresh(self, event):
+        self.LoadUsername()
+
+    def Deltoken(self, event):
+        username = self.usernameText.GetValue()
+        filename = self.filename.GetValue()
+        DSSE_deltoken.deltoken(username, filename)
 
 class ExamplePanel(wx.Panel):
     def __init__(self, parent):
@@ -172,7 +298,7 @@ class ExamplePanel(wx.Panel):
         grid.Add(self.quote, pos=(0, 0))
 
         # A multiline TextCtrl  This is here to show how the events work in this program, don't pay too much attention to it
-        self.logger =  wx.TextCtrl(self, size=(200, 300), style=wx.TE_MULTILINE | wx.TE_READONLY)
+        self.logger = wx.TextCtrl(self, size=(200, 300), style=wx.TE_MULTILINE | wx.TE_READONLY)
 
         # A button
         self.button = wx.Button(self, label='Save')
@@ -220,7 +346,7 @@ class ExamplePanel(wx.Panel):
 
     def EvtComboBox(self, event):
         self.logger.AppendText('EvtComboBox: %s\n' % event.GetString())
-        
+
     def OnClick(self, event):
         self.logger.AppendText(' Click on object with Id %d\n' % event.GetId())
 
@@ -246,7 +372,7 @@ class MyFrame(wx.Frame):
         # Create the menubar
         menuBar = wx.MenuBar()
 
-        # and a menu 
+        # and a menu
         menu = wx.Menu()
 
         # add an item to the menu, using \tKeyName automatically
@@ -264,7 +390,7 @@ class MyFrame(wx.Frame):
         self.SetMenuBar(menuBar)
 
         self.CreateStatusBar()
-        
+
         self.notebook = wx.Notebook(self, -1, name='notebook')
 
         self.notebook.AddPage(GenPanel(self.notebook), 'Gen')
@@ -274,13 +400,11 @@ class MyFrame(wx.Frame):
         self.notebook.AddPage(DeletePanel(self.notebook), 'Delete')
         self.notebook.AddPage(DecPanel(self.notebook), 'Dec')
         self.notebook.AddPage(ExamplePanel(self.notebook), 'Absolute Positioning')
-        
 
     def OnTimeToClose(self, evt):
         """Event handler for the button click."""
         print "See ya later!"
         self.Close()
-
 
     def OnSetUserInfo(self, evt):
         ''' Set User Info '''
@@ -301,7 +425,7 @@ class MyApp(wx.App):
 
         frame.Show(True)
         return True
-  
+
 try:
     app = MyApp(redirect=True)
     app.MainLoop()

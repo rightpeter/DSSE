@@ -1,40 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 __author__ = 'Rightpeter'
-import rsa
 import sys
 import os
-import os.path
-import re
-import hashlib
-import random
-import pickle
+import myTools
 
-enc_pattern = re.compile(r'.*\.enc')
-dec_pattern = re.compile(r'.*\.dec')
+def srchtoken(username, word):
+    tmpdir = os.path.join(os.getcwd(), 'tmp', username)
 
-def CalcSha1(word):
-    sha1obj = hashlib.sha1()
-    sha1obj.update(word)
-    hash = sha1obj.hexdigest()
-    return hash
+    if not os.path.isdir(tmpdir):
+        os.mkdir(tmpdir)
 
-def CalcMD5(word):
-    md5obj = hashlib.md5()
-    md5obj.update(word)
-    hash = md5obj.hexdigest()
-    return hash
+    with open(os.path.join(tmpdir, 'srch_token.tmp'), 'w+') as outputfile:
+        outputfile.write(username+' '+myTools.CalcSha1(word)+' '+myTools.CalcMD5(word))
 
 if __name__ == '__main__':
-    #print 'argv[0]: ', sys.argv[0]
-    #print 'argv[1]: ', sys.argv[1]
-    #print 'argv[2]: ', sys.argv[2]
-
     username = sys.argv[1]
     word = sys.argv[2]
 
-    print username, ' ', CalcSha1(word)
-    tmpdir = os.path.join(os.getcwd(), 'tmp', username)
-    with open(os.path.join(tmpdir, 'srch_token.tmp'), 'w+') as outputfile:
-        outputfile.write(username+' '+CalcSha1(word)+' '+CalcMD5(word))
-        
+    srchtoken(user, word)

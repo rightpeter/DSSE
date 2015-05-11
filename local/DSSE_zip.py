@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import sys
-import re 
+import re
 import zipfile
 import os.path
 import os
@@ -28,8 +28,6 @@ def zip(user, rootdir):
 
 
 if __name__ == '__main__':
-    # print 'argv[0]: ', sys.argv[0]
-    # print 'argv[1]: ', sys.argv[1]
     user = sys.argv[1]
     rootdir = os.path.join(os.getcwd(), 'db', user)
 
