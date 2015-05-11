@@ -1,5 +1,6 @@
 <div style="margin-top:100px;margin-left:50px;">
     <form  action="/delete" enctype="multipart/form-data" method="post">
+        {% raw xsrf_form_html() %}
         User Name:<input type="text" name="username" class='txt'><br>
         File Name:<input type="text" name="filename" class='txt'><br>
         <input type="submit" value="Submit">

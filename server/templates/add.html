@@ -1,5 +1,6 @@
 <div style="margin-top:100px;margin-left:50px;">
     <form  action="/add" enctype="multipart/form-data" method="post">
+        {% raw xsrf_form_html() %}
         User Name:<input type="text" name="username" class='txt'><br>
         Add Token:<input type="file" name="myfile"><br>
         Encrypted File:<input type="file" name="myfile"><br>
