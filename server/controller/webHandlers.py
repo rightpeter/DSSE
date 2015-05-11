@@ -2,28 +2,45 @@
 # -*- coding: utf-8 -*-
 
 import tornado.web
+import os
+import zipfile
 
 
-class MainHandler(tornado.web.RequestHandler):
+class BaseHandler(tornado.web.RequestHandler):
+    def get_current_user(self):
+        return self.get_secure_cookie("name")
+
+    def get_login_url(self):
+        return '/login'
+
+
+class MainHandler(BaseHandler):
     def get(self):
-        self.render("index.html")
+        user = self.get_current_user()
+        self.set_cookie('url', self.request.uri)
+        url = self.request.uri
+
+        self.render("index.html", user=user, url=url)
 
 
-class WorkHandler(tornado.web.RequestHandler):
+class DSSEHandler(BaseHandler):
     def get(self):
-        self.render("work.html")
+        user = self.get_current_user()
+        self.set_cookie('url', self.request.uri)
+        url = self.request.uri
+        content = self.get_argument('action', 'upload')
+
+        self.render('dsse.html', user=user, url=url, content=content)
 
 
-class TextFullHandler(tornado.web.RequestHandler):
+class DownloadHandler(BaseHandler):
     def get(self):
-        self.render("text_full.html")
+        self.redirect('/static/download/client.zip')
 
 
-class UploadHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.render("upload.html")
-
+class UploadHandler(BaseHandler):
     def post(self):
+        print 'hehe'
         username = self.get_argument('username')
         rootdir = os.getcwd()
         parent = os.path.join(rootdir, 'static/db/' + username)
@@ -47,7 +64,7 @@ class UploadHandler(tornado.web.RequestHandler):
         self.write('Upload Successful!')
 
 
-class TestHandler(tornado.web.RequestHandler):
+class TestHandler(BaseHandler):
     def get(self):
         self.set_header('Content-Type', 'application-zip')
         self.set_header('Content-Disposition', 'attachment;filename=search.zip')

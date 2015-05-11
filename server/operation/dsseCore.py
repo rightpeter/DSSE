@@ -9,6 +9,7 @@ import re
 import hashlib
 import random
 import pickle
+import zipfile
 
 __author__ = 'Rightpeter'
 
