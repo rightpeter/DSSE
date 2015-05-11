@@ -39,7 +39,6 @@ def DSSE_add(username, add_token, enc_file):
     filename_sha1 = CalcSha1(filename)
     filename_md5 = int(CalcMD5(filename), 16)
 
-    print '-----------------DSSE_add------------------\n'
     TD[filename_sha1] = -1 ^ filename_md5
 
     for word in add_token:
