@@ -1,47 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Home</title>
-<link rel="icon" type="image/png" href="/static/images/favicon.ico" />
-<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/static/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/static/images/apple-touch-icon-114x114.png">
-<!--[if lt IE 9]>
-<script src="scripts/ie9.js">IE7_PNG_SUFFIX=".png";</script>
-<![endif]-->
-<link href='../../fonts.googleapis.com/css@family=Arvo' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/static/stylesheets/style.css"> 
-<link rel="stylesheet" href="/static/stylesheets/responsive.css"> 
-<link rel="stylesheet" href="/static/stylesheets/jquery.fancybox-1.3.4.css" media="screen"> 
-<script src="/static/scripts/jquery-2.0.3.min.js"></script> 
-<script src="/static/scripts/jquery.easing-1.3.pack.js"></script>
-<script src="/static/scripts/jquery.fancybox-1.3.4.js"></script>
-<script src="/static/scripts/jquery.mousewheel-3.0.4.pack.js"></script>
-<script src="/static/scripts/js_func.js"></script>
-</head>
-<body>
-<div class="wraper">
- <header class="header">
-  <!-- top left menu -->
-  <nav>
-   <ul class="top_menu">
-    <li><a class="selected" href="/"><span>home</span></a></li>
-    <li><a href="/work"><span>function</span></a></li>
-    <li class="left_side"><a href="text_full"><span>about us </span></a></li>
-    
-   </ul>
-  </nav>
-  <!-- /top left menu -->
- </header>
-</div> 
-
-<!-- intro text --> 
-<div class="intro_text">
- <div class="wraper">
-  <h1>how to use dsse</h1>
-  <div><a href="/static/download/client.zip">Download Client Python Script  <span>Go ahead. <span>Clicky.</span></span></a></div>
+{% extends "base.html" %}
+{% block title %}DSSE Cloud Service{% end %}
+{% block body %}
+        <h1>DSSE Cloud Service Guide</h1>
   <p><span>This a simple implementation of DSSE designed by <br><br>
 
       Seny Kamara - Microsoft Research<br>
@@ -88,44 +48,10 @@ You can put your own files in db/(your id)/.<br>
     This script deciphers the search result of word even and <br>
     puts result in folder db/haha/even<br>
 </span></p>
+        <p><a class="btn btn-lg btn-success" href="/download" role="button">Get started</a></p>
+{% end %}
 
- </div>
-</div>
-<!-- /intro text -->
-
-
-<div class="footer_wrap">
- <div class="wraper">
-  <!-- about author -->
-  <div class="about_author">
-   <h3>about the author</h3>
-   <p><span><img src="/static/images/author/author.png" alt="" /></span>
-   <p>Rightpeter</p>
-   </p>
-  </div>
-  <!-- /about author -->
-  <!-- contact us -->
-  <div class="contact_block">
-   <h3>Contact us</h3>
-   <form method="post" action="#">
-    <p><input type="text" value="Full Name" id="name" /><input type="text" value="Email" id="email" /></p>
-    <p><textarea id="message">Comment</textarea></p>
-    <p><button>Send</button></p>
-   </form>
-  </div>
-  <!-- /contact us -->
-  <!-- footer copy -->
-  <footer>
-   <ul class="soc_icons">
-    <li><a href="#"><img src="/static/images/facebook.gif" alt="" /></a></li>
-    <li><a href="#"><img src="/static/images/tweeter.gif" alt="" /></a></li>
-    <li><a href="#"><img src="/static/images/rss.gif" alt="" /></a></li>
-   </ul>
-   <p>&copy; Copyright &copy; 2014.Company name All rights reserved.</p>
-  </footer>
-  <!-- /footer copy -->
- </div>
-</div>
-
-</body>
-</html> 
+{% block script %}
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/dist/js/bootstrap.min.js"></script>
+{% end %}
